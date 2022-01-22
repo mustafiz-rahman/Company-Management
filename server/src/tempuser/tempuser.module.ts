@@ -4,6 +4,9 @@ import { TempuserController } from './tempuser.controller';
 import { TempuserService } from './tempuser.service';
 import { Tempuser } from './entity/tempuser.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from 'src/constants/constants';
 
 
 //import { MailService } from './mail.service';
@@ -25,6 +28,10 @@ import { MailerModule } from '@nestjs-modules/mailer';
             from: '"No Reply" <mustafiz.jbc@gmail.com>',
           }
     }),
+    JwtModule.register({
+        secret:jwtConstants.secret,
+        signOptions: { expiresIn: '60s' },
+      }),
 ],
     controllers:[TempuserController],
     providers:[TempuserService]
