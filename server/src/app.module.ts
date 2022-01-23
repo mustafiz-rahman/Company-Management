@@ -12,11 +12,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(Config), CompanyModule, TempuserModule,
-    
-  
-  
-  ],
+  imports: [TypeOrmModule.forRoot(Config), CompanyModule, TempuserModule],
   controllers: [],
   providers: []
 })

@@ -1,5 +1,9 @@
 import { MailerService } from '@nestjs-modules/mailer';
-import { BadRequestException, Injectable, NotAcceptableException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotAcceptableException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { throws } from 'assert';
@@ -12,44 +16,45 @@ export class TempuserService {
   constructor(
     @InjectRepository(Tempuser) private repo: Repository<Tempuser>,
     private mailservice: MailerService,
-    private jwtService:JwtService
+    private jwtService: JwtService,
   ) {}
 
-  async createTempuser(email: string, companyName: string,role:string) {
+
+  //creating temporary user and send mail
+  async createTempuser(email: string, companyName: string, role: string) {
     const token = Math.random().toString(20).substring(2, 12);
     const tempPass = Math.random().toString(6).substring(2, 8);
-    const password =await bcrypt.hash(tempPass,12);
+    const password = await bcrypt.hash(tempPass, 12);
 
     //const check = await this.repo.find({ email });
 
-    
-      const tempuser =  this.repo.create({
-        email,
-        token,
-        companyName,
-        password,
-        role
-      });
-      this.mailCreation(email,companyName, token, tempPass);
-      return this.repo.save(tempuser);
-    
-    
-      
-    
+    const tempuser = this.repo.create({
+      email,
+      token,
+      companyName,
+      password,
+      role,
+    });
+    this.mailCreation(email, companyName, token, tempPass);
+    return this.repo.save(tempuser);
   }
-  async temoUserLogin(token:string,password:string){
 
-    const tempuser= await this.repo.findOne({token});
+  //authenticating temporary user
+  async temoUserLogin(token: string, password: string) {
+    const tempuser = await this.repo.findOne({ token });
 
-    if(!tempuser){
+    if (!tempuser) {
       throw new BadRequestException('token not match');
     }
-    if(!await bcrypt.compare(password,tempuser.password)){
+    if (!(await bcrypt.compare(password, tempuser.password))) {
       throw new BadRequestException('Password does not match');
     }
+
     return tempuser;
   }
 
+
+  //sending mail
   async mailCreation(
     email: string,
     companyName: string,

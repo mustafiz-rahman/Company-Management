@@ -29,7 +29,7 @@ import { jwtConstants } from 'src/constants/constants';
           }
     }),
     JwtModule.register({
-        secret:jwtConstants.secret,
+        secret:'secretKey',
         signOptions: { expiresIn: '60s' },
       }),
 ],
