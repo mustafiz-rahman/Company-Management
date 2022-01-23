@@ -10,6 +10,7 @@ import { throws } from 'assert';
 import { Repository } from 'typeorm';
 import { Tempuser } from './entity/tempuser.entity';
 import * as bcrypt from 'bcrypt';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class TempuserService {
@@ -17,6 +18,7 @@ export class TempuserService {
     @InjectRepository(Tempuser) private repo: Repository<Tempuser>,
     private mailservice: MailerService,
     private jwtService: JwtService,
+    private userSerVice:UserService
   ) {}
 
 
@@ -40,7 +42,7 @@ export class TempuserService {
   }
 
   //authenticating temporary user
-  async temoUserLogin(token: string, password: string) {
+  async temoUserAuth(token: string, password: string) {
     const tempuser = await this.repo.findOne({ token });
 
     if (!tempuser) {
@@ -51,6 +53,11 @@ export class TempuserService {
     }
 
     return tempuser;
+  }
+  //getting tempuser info
+
+  async getTempuser(id:number){
+    return this.repo.findOne(id);
   }
 
 

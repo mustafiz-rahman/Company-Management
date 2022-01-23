@@ -7,13 +7,15 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { JwtService } from '@nestjs/jwt';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'src/constants/constants';
+import { UserService } from 'src/user/user.service';
+import { UserModule } from 'src/user/user.module';
 
 
 //import { MailService } from './mail.service';
 
 @Module({
 
-    imports:[TypeOrmModule.forFeature([Tempuser]),
+    imports:[UserModule,TypeOrmModule.forFeature([Tempuser]),
      MailerModule.forRoot({
         transport:{
             host:'smtp.gmail.com',
@@ -30,8 +32,9 @@ import { jwtConstants } from 'src/constants/constants';
     }),
     JwtModule.register({
         secret:'secretKey',
-        signOptions: { expiresIn: '60s' },
+        signOptions: { expiresIn: '1d' },
       }),
+      
 ],
     controllers:[TempuserController],
     providers:[TempuserService]
