@@ -1,14 +1,8 @@
 import { IsEmail,IsString,IsNumber, IsDate } from "class-validator";
 
-export class CreateUserDto{
+export class UpdateUserDto{
     @IsEmail()
     email:string;
-    @IsString()
-    company:string;
-    @IsString()
-    role:string;
-    @IsString()
-    password:string;
     @IsString()
     name:string;
     @IsString()
@@ -19,7 +13,7 @@ export class CreateUserDto{
     address:string;
     @IsNumber()
     phoneNumber:number;
-    @IsDate()
+    @IsString()
     dob:string;
     @IsString()
     remarks:string;

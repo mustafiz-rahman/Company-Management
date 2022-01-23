@@ -17,8 +17,7 @@ export class TempuserService {
   constructor(
     @InjectRepository(Tempuser) private repo: Repository<Tempuser>,
     private mailservice: MailerService,
-    private jwtService: JwtService,
-    private userSerVice:UserService
+   
   ) {}
 
 
