@@ -15,7 +15,9 @@ import { UserModule } from './user/user.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(Config), CompanyModule, TempuserModule, UserModule],
+  imports: [TypeOrmModule.forRoot(Config), CompanyModule, TempuserModule, UserModule,
+    
+  ],
   controllers: [],
   providers: []
 })

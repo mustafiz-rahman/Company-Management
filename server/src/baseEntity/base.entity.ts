@@ -1,5 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn,  } from "typeorm";
-import Role from "src/models/role.enum";
+import {Role} from "src/models/role.enum";
+import { ExclusionMetadata } from "typeorm/metadata/ExclusionMetadata";
+import {Exclude} from 'class-transformer';
 
 export abstract class Baseinfo{
     @PrimaryGeneratedColumn()
@@ -9,8 +11,9 @@ export abstract class Baseinfo{
     @Column()
     companyName:string;
     @Column()
+    @Exclude()
     password:string;
-    @Column({type:'enum',enum:Role,default:Role.systemAdmin})
-    role:string;
+    @Column({type:'enum',enum:Role,default:Role.Admin})
+    role:Role;
 
 }

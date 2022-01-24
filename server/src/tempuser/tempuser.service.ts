@@ -11,6 +11,7 @@ import { Repository } from 'typeorm';
 import { Tempuser } from './entity/tempuser.entity';
 import * as bcrypt from 'bcrypt';
 import { UserService } from 'src/user/user.service';
+import {Role} from 'src/models/role.enum';
 
 @Injectable()
 export class TempuserService {
@@ -22,7 +23,7 @@ export class TempuserService {
 
 
   //creating temporary user and send mail
-  async createTempuser(email: string, companyName: string, role: string) {
+  async createTempuser(email: string, companyName: string, role: Role) {
     const token = Math.random().toString(20).substring(2, 12);
     const tempPass = Math.random().toString(6).substring(2, 8);
     const password = await bcrypt.hash(tempPass, 12);

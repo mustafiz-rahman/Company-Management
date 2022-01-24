@@ -1,7 +1,6 @@
-enum Role {
-    systemAdmin = 'System Admin',
-    adminAuth = 'Administrative authority',
-    genarelAuth= 'General Authority'
+ export enum Role {
+    System = 'System',
+    Admin= 'Admin',
+    General= 'General'
   }
    
-  export default Role;

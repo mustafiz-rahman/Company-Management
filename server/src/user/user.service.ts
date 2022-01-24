@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entity/user.entity';
 import * as bcrypt from 'bcrypt';
+import {Role} from 'src/models/role.enum';
 
 @Injectable()
 export class UserService {
@@ -12,7 +13,7 @@ export class UserService {
     async signUp(
         email:string,
         companyName:string,
-        role:string,
+        role:Role,
         passsword:string,
         name:string,
         depertment:string,
