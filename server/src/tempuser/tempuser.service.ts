@@ -68,7 +68,7 @@ export class TempuserService {
     token: string,
     password: string,
   ) {
-    const url = `http://localhost:3001/${token}`;
+    const url = `http://localhost:3001/tempuser/${token}`;
 
     await this.mailservice
       .sendMail({
