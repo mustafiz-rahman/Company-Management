@@ -8,12 +8,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtGuard } from 'src/gurds/jwt.guard';
 import { JwtStrategy } from 'src/gurds/jwt.strategy';
+import { RolesGuard } from 'src/gurds/roles.guard';
 
 
 @Module({
     imports:[TypeOrmModule.forFeature([User]),
     PassportModule.register({
-        defaultStrategy:'jwt'
+        defaultStrategy:'jwt',
+        session:true
     }),
     JwtModule.register({
         secret:'secretKey',
@@ -21,7 +23,7 @@ import { JwtStrategy } from 'src/gurds/jwt.strategy';
       }),
       
 ],
-    providers:[UserService,JwtGuard,JwtStrategy],
+    providers:[UserService,JwtGuard,JwtStrategy,RolesGuard],
     controllers:[UserController],
     exports:[UserService]
 

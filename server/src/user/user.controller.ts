@@ -7,10 +7,14 @@ import { JwtService } from '@nestjs/jwt';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtPayload } from './jwt_payload.interface';
 import { JwtGuard } from 'src/gurds/jwt.guard';
+import { Roles } from 'src/models/roles.decorator';
+import { Role } from 'src/models/role.enum';
+import { RolesGuard } from 'src/gurds/roles.guard';
 
 
 
 @UseInterceptors(ClassSerializerInterceptor)
+
 @Controller()
 export class UserController {
     constructor(private userService:UserService,private jwtService: JwtService){}
@@ -19,8 +23,8 @@ export class UserController {
     async signin(@Body() body:SigninDto , @Res({passthrough:true}) response:Response):Promise<{accessToken:string}>{
         const user = await this.userService.signin(body.email,body.password);
         
-        const id= user.id;
-        const payload:JwtPayload = {id};
+        const{id,role} = user;
+        const payload:JwtPayload = {id,role};
         const accessToken = await this.jwtService.signAsync(payload);
         response.cookie('jwt',accessToken,{httpOnly:true})
         
@@ -40,9 +44,10 @@ export class UserController {
     async allUser(){
         return this.userService.getAllUser();
     }
+    @Roles(Role.General,Role.Admin)
+    @UseGuards(RolesGuard)
     @UseGuards(JwtGuard)
     @Get('/profile/:id')
-  
     async userProfile(@Param('id') id:string){
         return this.userService.findUser(parseInt(id));
 
