@@ -2,25 +2,19 @@ import { MailerService } from '@nestjs-modules/mailer';
 import {
   BadRequestException,
   Injectable,
-  NotAcceptableException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { throws } from 'assert';
 import { Repository } from 'typeorm';
 import { Tempuser } from './entity/tempuser.entity';
 import * as bcrypt from 'bcrypt';
-import { UserService } from 'src/user/user.service';
-import {Role} from 'src/models/role.enum';
+import { Role } from 'src/models/role.enum';
 
 @Injectable()
 export class TempuserService {
   constructor(
     @InjectRepository(Tempuser) private repo: Repository<Tempuser>,
     private mailservice: MailerService,
-   
   ) {}
-
 
   //creating temporary user and send mail
   async createTempuser(email: string, companyName: string, role: Role) {
@@ -56,10 +50,9 @@ export class TempuserService {
   }
   //getting tempuser info
 
-  async getTempuser(id:number){
+  async getTempuser(id: number) {
     return this.repo.findOne(id);
   }
-
 
   //sending mail
   async mailCreation(
@@ -68,7 +61,7 @@ export class TempuserService {
     token: string,
     password: string,
   ) {
-    const url = `http://localhost:3001/tempuser/${token}`;
+    const url = `http://localhost:3001/signup/${token}`;
 
     await this.mailservice
       .sendMail({

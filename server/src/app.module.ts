@@ -12,7 +12,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { UserService } from './user/user.service';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
-
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { CurrentUserInterceptor } from 'src/interceptors/current-user.interceptor';
 
 @Module({
   imports: [TypeOrmModule.forRoot(Config), CompanyModule, TempuserModule, UserModule,

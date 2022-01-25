@@ -8,30 +8,20 @@ import { User } from 'src/user/entity/user.entity';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
+  constructor(private reflactor: Reflector) {}
 
-  constructor(private reflactor:Reflector){}
+  canActivate(context: ExecutionContext) {
+    const requiredRoles = this.reflactor.getAllAndOverride<Role[]>(ROLES_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
 
-  canActivate(
-    context: ExecutionContext,
-  ){
-      const requiredRoles= this.reflactor.getAllAndOverride<Role[]>(ROLES_KEY,[
-        context.getHandler(),
-        context.getClass()
-      ])
-
-      if(requiredRoles)
-      {
-        const {user} = context.switchToHttp().getRequest();
-        
-        return requiredRoles.some((role)=>user.role?.includes(role));
-        
-      }
-      
-      
-      
-      //console.log(user);
-      
+    if (!requiredRoles) {
       return true;
-    
+    }
+    const { user } = context.switchToHttp().getRequest();
+    return requiredRoles.some((role) => user.role?.includes(role));
+
+    //console.log(user);
   }
 }
