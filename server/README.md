@@ -1,4 +1,4 @@
-## App Name: Employee Managemen System
+# Employee Managemen System
 ## Description 
     This is a service based app. Multiple company can use the app.
 ## Technologies to build the App
