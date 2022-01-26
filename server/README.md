@@ -104,6 +104,11 @@
 
     on the terminal run the following command
 
+        Install nestjs
+        ```bash
+        $ npm i -g @nestjs/cli
+        ```
+
         Install npm
         ```bash
         $ npm install
