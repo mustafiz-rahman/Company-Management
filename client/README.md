@@ -92,7 +92,7 @@
 
 ## How to run the code on your machine
 
-   Setep : 1 
+Setep : 1 
         
         install pgsql on your machine and change the code from src/config/orm.config.ts according to your credential
         
@@ -100,7 +100,7 @@
         username:'postgres', //database user name
         password:'admin', //password of your database
 
-    Step : 2
+Step : 2
 
     on the terminal run the following command
 
@@ -121,7 +121,7 @@
         $ npm run start:dev
         ```
 
-    Step : 3
+Step : 3
 
         As I am not implimented the fronend part please check all the api on postman or other api testing app
 
