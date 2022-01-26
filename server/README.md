@@ -1,7 +1,21 @@
 # Employee Managemen System
 ## Description 
     This is a service based app. Multiple company can use the app.
-## Technologies to build the App
+    Features:
+    There are 3 types of user System Admin,Admin,Genarel User
+     >>System Admin :
+            *Can send account opening invitation through mail for role(ex: system admin,admin,general user);
+            *Can register company
+            *Can view all company info and all the user
+            *Can Edit all company info and all the user
+     >>Admin :
+            *Can send account opening invitation through mail for role(ex: admin,general user);
+            *Can view  company info and all the user that he blong to.
+            *Can Edit company info that he belong to and all the user info of that company.
+     >> General user:
+            *Can see company info that he belong to and his profile.
+            *Can edit his own profile.    
+## Technologies used to build the App
     DataBase : postgresql
     Backend: 
         framework: Nestjs
@@ -12,27 +26,3 @@
         Programming Language: Typescript 
 
 
-## Installation
-
-```bash
-$ npm install
-```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-Markup :  # Heading 1 #
-
--OR-
-
-Markup :  ============= (below H1 text)
