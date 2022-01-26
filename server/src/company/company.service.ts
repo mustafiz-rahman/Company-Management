@@ -37,6 +37,9 @@ export class CompanyService {
   getCompany(companyId: number) {
     return this.repo.findOne(companyId);
   }
+  getCompanyByname(companyName:string){
+    return this.repo.findOne(companyName);
+  }
 
   async updateCompanyInfo(id: number, atter: Partial<Company>) {
     const company = await this.getCompany(id);
@@ -55,4 +58,6 @@ export class CompanyService {
       .getMany();
     return name;
   }
+
+  
 }
