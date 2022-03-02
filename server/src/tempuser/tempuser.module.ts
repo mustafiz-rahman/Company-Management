@@ -22,8 +22,8 @@ import { UserModule } from 'src/user/user.module';
         port: 465,
         secure: true,
         auth: {
-          user: 'mustafiz.jbc@gmail.com',
-          pass: 'Mustafiz@cecsiub',
+          user: 'mustafiz.jbc@gmail.com',//put your email here
+          pass: '**********',//put your email password here
         },
       },
       defaults: {
