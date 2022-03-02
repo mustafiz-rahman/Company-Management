@@ -1,4 +1,5 @@
 import { createParamDecorator,ExecutionContext } from "@nestjs/common";
+import { never } from "rxjs";
 
 export const CurrentUser = createParamDecorator(
     (data:never,context:ExecutionContext)=>{
@@ -6,3 +7,4 @@ export const CurrentUser = createParamDecorator(
         return request.CurrentUser;
     }
 ) 
+

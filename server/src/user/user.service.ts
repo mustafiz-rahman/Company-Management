@@ -24,7 +24,7 @@ export class UserService {
     remarks: string,
   ) {
     const password = await bcrypt.hash(passsword, 12);
-    const user = await this.repo.create({
+    const user = this.repo.create({
       email,
       companyName,
       role,
